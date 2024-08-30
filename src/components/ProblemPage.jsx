@@ -30,9 +30,16 @@ const ProblemPage = () => {
   useEffect(() => {
     if (isVisible && textRef.current) {
       textRef.current.classList.add("typing-effect");
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         textRef.current.classList.add("finished");
       }, 3500); // Match this to the duration of your typing animation
+
+      return () => {
+        clearTimeout(timer);
+        if (textRef.current) {
+          textRef.current.classList.remove("typing-effect", "finished");
+        }
+      };
     }
   }, [isVisible]);
 

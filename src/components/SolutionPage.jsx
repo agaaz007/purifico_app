@@ -4,7 +4,7 @@ import Navbar from "./NavBar";
 
 const SolutionCard = ({ title, description, number }) => {
   return (
-    <div className="relative w-full sm:w-72 h-auto sm:h-96 bg-gradient-to-b from-[#49B726] via-[#4AB826] to-[#164D05] rounded-lg overflow-hidden transition-all duration-300 transform hover:-translate-x-2 hover:-translate-y-2 hover:shadow-2xl shadow-lg">
+    <div className="relative w-full sm:w-72 h-auto sm:h-96 bg-gradient-to-b from-[#49B726] via-[#4AB826] to-[#164D05] rounded-lg overflow-hidden transition-all duration-300 transform hover:-translate-x-2 hover:-translate-y-2 hover:shadow-2xl shadow-lg shadow-zinc-500">
       <div className="p-4 sm:p-6 h-full flex flex-col justify-between border-[1px] rounded-lg border-white">
         <div className="text-xl sm:text-2xl font-medium text-black absolute top-2 left-2 font-sourcecodepro">
           {number.padStart(2, "0")}

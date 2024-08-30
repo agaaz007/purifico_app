@@ -1,4 +1,10 @@
+import React, { useRef, useState, useEffect } from "react";
+
 const SurveyData = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(false);
+  const containerRef = useRef(null);
+
   const surveyItems = [
     {
       percentage: 82,
@@ -20,20 +26,62 @@ const SurveyData = () => {
     },
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsTyping(true);
+          setCurrentIndex(0);
+        } else {
+          setIsTyping(false);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isTyping && currentIndex < surveyItems.length) {
+      const timer = setTimeout(() => {
+        setCurrentIndex(currentIndex + 1);
+      }, 1500); // Adjusted this value to speed up the delay between items
+
+      return () => clearTimeout(timer);
+    }
+  }, [isTyping, currentIndex]);
+
   return (
-    <div className="text-white w-full mt-10">
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
+    <div className="text-white w-full mt-10" ref={containerRef}>
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-10 -mt-14">
         <hr className="mb-4 opacity-20" />
         <h2 className="text-3xl font-SuisseIntlRegular text-center mb-8">
           Our Survey
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {surveyItems.map((item, index) => (
-            <div key={index} className="p-6 rounded-lg">
-              <div className="text-8xl font-bold mb-2 font-SuisseIntlRegular">
-                {item.percentage}%
+            <div key={index} className="p-6 rounded-lg h-48">
+              <div className="text-8xl font-bold mb-2 font-SuisseIntlRegular h-24 break-words whitespace-normal">
+                {index < currentIndex && (
+                  <span
+                    className={`typing-effect ${
+                      index === currentIndex - 1 ? "cursor-blink" : "finished"
+                    }`}
+                  >
+                    {item.percentage}%
+                  </span>
+                )}
               </div>
-              <p className="text-sm text-gray-300 font-sourcecodepro">
+              <p className="text-sm text-gray-300 font-sourcecodepro custom-text-wrap h-24 break-words whitespace-normal">
                 {item.description}
               </p>
             </div>
