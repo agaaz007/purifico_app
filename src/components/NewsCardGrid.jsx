@@ -48,14 +48,14 @@ const DualImageCard = ({
 const NewsCardGrid = () => {
   const cards = [
     {
-      screenshotUrl: "/public/screenshot2.png",
+      screenshotUrl: "https://i.postimg.cc/pVKTGhrz/screenshot2.png",
       backgroundUrl: "https://i.postimg.cc/rFWS9wXP/Problem-Card2.png",
       link: "https://www.health.harvard.edu/blog/the-bacterial-horror-of-the-hot-air-hand-dryer-2018051113823",
       intriguingText: "Harvard study reveals shocking truth about hand dryers",
     },
     {
-      screenshotUrl: "/public/screenshot1.png",
-      backgroundUrl: "/public/ProblemCard1.png",
+      screenshotUrl: "https://i.postimg.cc/d1y1KDBM/screenshot1.png",
+      backgroundUrl: "https://i.postimg.cc/VkWn3ZN9/Problem-Card1.png",
       link: "https://www.usatoday.com/story/news/nation-now/2018/04/12/hand-dryers-suck-bathroom-bacteria-and-blow-them-all-over-your-hands-study-finds/511723002/#:~:text=Researchers%20examined%20plates%20exposed%20to,than%20one%20colony%20on%20average.",
       intriguingText: "Nation Now on hand dryers' shocking truth",
     },
