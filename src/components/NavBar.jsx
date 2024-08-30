@@ -27,7 +27,7 @@ const NavBar = () => {
     <div className="fixed top-4 left-0 right-0 z-30">
       <div className="container mx-auto px-4 md:px-8">
         <nav
-          className="relative flex items-center justify-between rounded-xl py-4 shadow-lg h-20"
+          className="relative flex items-center justify-between rounded-xl py-4 shadow-lg h-20 border-2"
           style={{
             animation: "gradientAnimation 5s linear infinite",
             borderImage:
