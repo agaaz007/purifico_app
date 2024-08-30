@@ -10,10 +10,10 @@ const SolutionCard = ({ title, description, number }) => {
           {number.padStart(2, "0")}
         </div>
         <div className="mt-8 sm:mt-12">
-          <h3 className="text-2xl sm:text-4xl font-medium text-black mb-2 sm:mb-4 font-sourcecodepro text-left leading-tight">
+          <h3 className="text-2xl sm:text-4xl font-medium text-black mb-2 sm:mb-4 font-SuisseIntlRegular text-left leading-tight">
             {title}
           </h3>
-          <p className="text-[#fcfcfc] font-sourcecodepro text-left text-base sm:text-xl">
+          <p className="text-[#fcfcfc] font-SuisseIntlRegular font-light text-left sm:text-xl">
             {description}
           </p>
         </div>
@@ -58,9 +58,13 @@ const SolutionPage = () => {
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
       />
+      {/* Green elliptical gradient */}
+      <div className="absolute top-0 left-0 right-0 h-96 overflow-hidden">
+        <div className="w-full h-full bg-gradient-to-b from-green-500 to-transparent rounded-full transform scale-150 -translate-y-1/2 opacity-50"></div>
+      </div>
       <Navbar />
-      <main className="relative container mx-auto px-4 py-16 text-center">
-        <h2 className="text-5xl sm:text-7xl mt-24 mb-8 font-medium tracking-tight bg-zinc-300 bg-clip-text text-transparent font-SuisseIntlRegular">
+      <main className="relative container mx-auto px-4 py-16 text-center -mt-6">
+        <h2 className="text-5xl sm:text-7xl mt-24 mb-8 font-medium tracking-tight bg-gradient-to-r from-zinc-400 to-green-300 bg-clip-text text-transparent font-SuisseIntlRegular">
           Solution
         </h2>
         <p className="mb-16 max-w-2xl mx-auto text-zinc-300 leading-8 text-lg sm:text-xl">

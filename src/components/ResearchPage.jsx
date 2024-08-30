@@ -51,15 +51,17 @@ const ResearchPage = () => {
     <div className="relative text-white min-h-screen overflow-hidden">
       {/* Background Color */}
       <div className="absolute inset-0 z-0 bg-[#181A1B] opacity-20" />
+      {/* Gradient Background */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-tl from-zinc-400 via-gray-800 to-black opacity-30" />
       <div className="absolute -mt-32 left-0 right-0 h-32 sm:h-48">
         <div className="w-[150%] h-full bg-green-600 rounded-full mt-16 filter blur-3xl opacity-30 absolute left-1/2 transform -translate-x-1/2"></div>
       </div>
       <Navbar />
-      <main className="relative container mx-auto px-4 py-8 sm:px-10 sm:py-16 text-center">
-        <h2 className="text-6xl mt-12 sm:text-7xl mb-4 sm:mb-8 font-medium tracking-tight text-zinc-300 font-SuisseIntlRegular">
+      <main className="relative container mx-auto px-4 py-8 sm:px-10 sm:py-16 text-center mt-4">
+        <h2 className="text-6xl mt-12 sm:text-7xl mb-4 sm:mb-8 font-medium tracking-tight font-SuisseIntlRegular bg-gradient-to-r from-white via-white to-blue-500 bg-[length:200%_100%] text-transparent bg-clip-text" style={{backgroundPosition: '90% 0'}}>
           Research
         </h2>
-        <p className="-mt-6 text-[#00AA37] text-base sm:text-xl">
+        <p className="-mt-6 text-[#00AA37] font-medium font-SuisseIntlRegular text-lg sm:text-xl">
           Tested under a conventional Hand-Dryer
         </p>
 
