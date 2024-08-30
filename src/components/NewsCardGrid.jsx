@@ -49,7 +49,7 @@ const NewsCardGrid = () => {
   const cards = [
     {
       screenshotUrl: "/public/screenshot2.png",
-      backgroundUrl: "/public/ProblemCard2.png",
+      backgroundUrl: "https://i.postimg.cc/rFWS9wXP/Problem-Card2.png",
       link: "https://www.health.harvard.edu/blog/the-bacterial-horror-of-the-hot-air-hand-dryer-2018051113823",
       intriguingText: "Harvard study reveals shocking truth about hand dryers",
     },

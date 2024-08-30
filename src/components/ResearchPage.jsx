@@ -91,9 +91,8 @@ const ResearchPage = () => {
 
         <div className="flex justify-center mt-6 sm:mt-10">
           <div className="w-3/4 text-center">
-            <h2 className="text-[#00AA37] font-normal text-xl sm:text-2xl">
-              This proved that the pathogenic load being delivered in just
-              <span className="text-red-600"> 10 seconds</span> of hand-dryer
+            <h2 className="text-white font-normal text-xl sm:text-2xl">
+              This proved that the pathogenic load being delivered in just <span className="underline">10 seconds</span> of hand-dryer
               exposure was immense and disease causing.
             </h2>
           </div>

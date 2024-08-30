@@ -29,7 +29,7 @@ const NavBar = () => {
         <nav
           className="relative flex items-center justify-between rounded-xl py-4 shadow-lg h-20 border-2"
           style={{
-            animation: "gradientAnimation 5s linear infinite",
+            animation: "gradientAnimation 10s ease-in-out infinite",
             borderImage:
               "linear-gradient(90deg, #0000ff, #800080, #ff00ff, #00ffff) 1",
             borderRadius: "1rem",

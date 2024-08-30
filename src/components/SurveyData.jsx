@@ -21,20 +21,28 @@ const SurveyData = () => {
   ];
 
   return (
-    <div className="bg-black/50 text-white w-full mt-10">
+    <div className="text-white w-full mt-10">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-3xl font-SuisseIntlRegular text-center mb-8">Our Survey</h2>
+        <hr className="mb-4 opacity-20" />
+        <h2 className="text-3xl font-SuisseIntlRegular text-center mb-8">
+          Our Survey
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {surveyItems.map((item, index) => (
-            <div key={index} className="bg-zinc-800 p-6 rounded-lg">
-              <div className="text-5xl font-bold mb-2 font-sourcecodepro">{item.percentage}%</div>
-              <p className="text-sm text-gray-300 font-SuisseIntlRegular">{item.description}</p>
+            <div key={index} className="p-6 rounded-lg">
+              <div className="text-8xl font-bold mb-2 font-SuisseIntlRegular">
+                {item.percentage}%
+              </div>
+              <p className="text-sm text-gray-300 font-sourcecodepro">
+                {item.description}
+              </p>
             </div>
           ))}
         </div>
         <p className="text-center text-gray-400 mt-6 text-sm">
           Sample size: 150 people.
         </p>
+        <hr className="mt-4 opacity-20" />
       </div>
     </div>
   );
