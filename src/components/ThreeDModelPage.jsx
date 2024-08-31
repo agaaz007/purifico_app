@@ -9,7 +9,7 @@ const ThreeDModelPage = () => {
   const [isDragging, setIsDragging] = useState(false);
   const rotation = useRef({ x: 0, y: 0 });
   const prevPosition = useRef({ x: 0, y: 0 });
-  const autoRotationSpeed = 0.00001;
+  const autoRotationSpeed = 0.003;
   const autoRotationRef = useRef(true);
 
   useEffect(() => {
