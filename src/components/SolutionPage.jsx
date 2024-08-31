@@ -62,6 +62,10 @@ const SolutionPage = () => {
       <div className="absolute top-0 left-0 right-0 h-96 overflow-hidden">
         <div className="w-full h-full bg-gradient-to-b from-green-500 to-transparent rounded-full transform scale-150 -translate-y-1/2 opacity-50"></div>
       </div>
+      {/* Blue gradient at the bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-96 overflow-hidden">
+        <div className="w-full h-full bg-gradient-to-t from-blue-900 via-blue-600 to-transparent rounded-full transform scale-150 translate-y-1/2 opacity-50"></div>
+      </div>
       <Navbar />
       <main className="relative container mx-auto px-4 py-16 text-center -mt-6">
         <h2 className="text-4xl sm:text-5xl lg:text-7xl mt-24 mb-8 font-medium tracking-tight bg-gradient-to-r from-zinc-400 to-green-300 bg-clip-text text-transparent font-SuisseIntlRegular">

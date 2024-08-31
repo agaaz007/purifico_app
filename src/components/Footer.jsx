@@ -2,43 +2,34 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-zinc-900 text-white py-8">
+    <footer className="bg-gradient-to-b from-blue-900 to-black text-white py-8">
       <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <div className="mb-8 sm:mb-0">
           <h2 className="text-xl font-bold">PURIFICO</h2>
           <p className="mt-2">+1 (7635) 547-12-97</p>
           <p className="mt-1">support@purifico.com</p>
         </div>
+        {/* Quick Links section removed */}
         <div className="mb-8 sm:mb-0">
-          <h3 className="text-lg -ml-4 font-bold">Quick Links</h3>
-          <ul className="-ml-3 mt-2">
-            <li className="mt-1">
-              <a href="#" className="hover:underline">
-                Product
-              </a>
-            </li>
-            <li className="mt-1">
-              <a href="#" className="hover:underline">
-                Company
-              </a>
-            </li>
-            <li className="mt-1">
-              <a href="#" className="hover:underline">
-                Information
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="mb-8 sm:mb-0">
-          <h3 className="text-lg font-bold">Subscribe</h3>
           <div className="mt-2 flex">
-            <input
-              type="email"
-              placeholder="Get product updates"
-              className="p-2 rounded-l-lg text-black"
-            />
-            <button className="bg-blue-500 text-white p-2 px-4 rounded-r-lg">
-              →
+            <button className="relative inline-flex items-center px-6 py-3 text-white bg-gradient-to-tr from-black via-black to-gray-800 border border-blue-600 rounded-full transition-shadow duration-300 ease-in-out group hover:shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+              <span className="relative flex items-center space-x-2">
+                <span className="font-helvetica">Contact Us</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </span>
             </button>
           </div>
         </div>
@@ -52,9 +43,6 @@ const Footer = () => {
             <i className="fab fa-instagram"></i>
           </a>
         </div>
-        <p className="mt-4 sm:mt-0">
-          A product of <span className="font-bold">PURIFICO</span>
-        </p>
         <p className="mt-4 sm:mt-0">© 2024 Purifico. All rights reserved</p>
       </div>
     </footer>
