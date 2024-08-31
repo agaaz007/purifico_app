@@ -32,7 +32,7 @@ const Hero = () => {
         <p className="text-sm font-thin mt-24 mb-2 text-zinc-300 font-sans sm:text-base">
           LAUNCHING
         </p>
-        <h1 className="text-5xl sm:text-6xl font-semibold mt-6 mb-4 tracking-tight font-AvenirHeavy">
+        <h1 className="text-5xl lg:text-7xl font-semibold mt-6 mb-4 tracking-tight font-AvenirHeavy">
           <span className="text-blue-500">PURIFICO</span>
         </h1>
         <h2 className="text-4xl sm:text-5xl mb-8 text-zinc-400 font-extralight font-SuisseIntlRegular tracking-tight">
