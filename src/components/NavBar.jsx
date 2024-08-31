@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1200); // Updated breakpoint
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -10,8 +10,8 @@ const NavBar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-      if (window.innerWidth >= 1024) {
+      setIsMobile(window.innerWidth < 1200); // Updated breakpoint
+      if (window.innerWidth >= 1200) { // Updated breakpoint
         setIsOpen(false);
       }
     };
@@ -37,14 +37,14 @@ const NavBar = () => {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 xl:px-8"> {/* Changed lg to xl */}
         <div className="flex items-center justify-between h-24">
           <div className="flex-shrink-0">
             <a href="/" className="text-white text-3xl font-bold">
               PURIFICO
             </a>
           </div>
-          <div className="hidden lg:block flex-grow">
+          <div className="hidden xl:block flex-grow"> {/* Changed lg to xl */}
             <div className="ml-20 flex items-baseline space-x-12 justify-end">
               <a
                 href="/"
@@ -76,12 +76,14 @@ const NavBar = () => {
               >
                 Contact Us
               </a>
-              <button className="bg-blue-800 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-xl font-medium transition-all duration-300 ease-out hover:scale-110">
-                Sign Up
-              </button>
+              <div className="pl-4">
+                <button className="bg-blue-800 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-xl font-medium transition-all duration-300 ease-out hover:scale-110">
+                  Sign Up
+                </button>
+              </div>
             </div>
           </div>
-          <div className="lg:hidden">
+          <div className="xl:hidden"> {/* Changed lg to xl */}
             <button
               onClick={toggleMenu}
               className="text-white focus:outline-none"
@@ -96,7 +98,7 @@ const NavBar = () => {
         </div>
       </div>
       {isMobile && isOpen && (
-        <div className="lg:hidden">
+        <div className="xl:hidden"> {/* Changed lg to xl */}
           <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3">
             <a
               href="/"
