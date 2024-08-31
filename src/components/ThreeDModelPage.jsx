@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 import backgroundImage from "../assets/background2.jpg";
 
 const ThreeDModelPage = () => {
@@ -7,7 +9,7 @@ const ThreeDModelPage = () => {
   const [isDragging, setIsDragging] = useState(false);
   const rotation = useRef({ x: 0, y: 0 });
   const prevPosition = useRef({ x: 0, y: 0 });
-  const autoRotationSpeed = 0.0005;
+  const autoRotationSpeed = 0.00001;
   const autoRotationRef = useRef(true);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const ThreeDModelPage = () => {
 
     // Set up a basic cube (you can replace this with your 3D model later)
     const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+    const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
@@ -46,6 +48,26 @@ const ThreeDModelPage = () => {
     scene.add(ambientLight);
 
     camera.position.z = 5;
+
+    // Add text "Revealing soon"
+    const loader = new FontLoader();
+    loader.load(
+      "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
+      (font) => {
+        const textGeometry = new TextGeometry("Revealing soon", {
+          font: font,
+          size: 0.2,
+          height: 0.05,
+          curveSegments: 12,
+          bevelEnabled: false,
+        });
+        const textMaterial = new THREE.MeshPhongMaterial({ color: 0x4da6ff });
+        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+
+        textMesh.position.set(-0.8, 0, 3.2); // Positioning text closer to the camera and in front of the cube
+        scene.add(textMesh);
+      }
+    );
 
     const startDragging = (clientX, clientY) => {
       setIsDragging(true);
