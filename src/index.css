@@ -84,12 +84,18 @@
 }
 
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes blink {
-  50% { border-color: transparent }
+  50% {
+    border-color: transparent;
+  }
 }
 
 .typing-effect {
@@ -99,24 +105,21 @@
   white-space: nowrap;
   margin: 0 auto;
   letter-spacing: 0.15em;
-  animation: 
-    typing 3.5s steps(40, end),
-    blink 0.75s step-end infinite;
+  animation: typing 1s steps(40, end),
+    /* Adjusted duration to 1.5s */ blink 0.75s step-end infinite;
 }
 
-/* Adjust the animation for percentage numbers */
 .text-8xl .typing-effect {
-  animation-duration: 2s;
+  animation-duration: 1s; /* Adjusted duration to 1s */
 }
 
-/* Ensure the container has a fixed height to prevent layout shifts */
-.p-6.rounded-lg {
-  height: 200px; /* Adjust this value as needed */
+.typing-effect.finished {
+  border-right: none; /* Hide cursor when finished */
 }
 
 @media (max-width: 640px) {
   .typing-effect {
-    animation-duration: 2s; /* Shorter duration for mobile */
+    animation-duration: 1s; /* Shorter duration for mobile */
   }
 }
 
@@ -235,4 +238,26 @@ body {
 
 .parallax img:nth-child(2) {
   right: 10%;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  transition: transform 0.3s ease-in-out;
+}
+
+.bg-zinc-900 {
+  background-color: #18181b;
+}
+
+.bg-black {
+  background-color: #000000;
+  width: 100%;
+}
+
+.text-white {
+  color: #ffffff;
 }

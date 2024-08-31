@@ -4,6 +4,7 @@ import ProblemPage from "./components/ProblemPage";
 import ResearchPage from "./components/ResearchPage";
 import SolutionPage from "./components/SolutionPage";
 import Footer from "./components/Footer";
+import ThreeDModelPage from "./components/ThreeDModelPage";
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
       <ProblemPage />
       <ResearchPage />
       <SolutionPage />
-      {/* <BlankTemplate /> */}
+      {/* <ThreeDModelPage />  */}
       <Footer />
     </div>
   );

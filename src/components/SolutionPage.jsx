@@ -4,16 +4,16 @@ import Navbar from "./NavBar";
 
 const SolutionCard = ({ title, description, number }) => {
   return (
-    <div className="relative w-full sm:w-72 h-auto sm:h-96 bg-gradient-to-b from-[#49B726] via-[#4AB826] to-[#164D05] rounded-lg overflow-hidden transition-all duration-300 transform hover:-translate-x-2 hover:-translate-y-2 hover:shadow-2xl shadow-lg shadow-zinc-500">
-      <div className="p-4 sm:p-6 h-full flex flex-col justify-between border-[1px] rounded-lg border-white">
-        <div className="text-xl sm:text-2xl font-medium text-black absolute top-2 left-2 font-sourcecodepro">
+    <div className="relative w-full h-full bg-gradient-to-b from-[#ddf8d4] via-[#aefd98] to-[#5fb345] rounded-lg overflow-hidden transition-all duration-300 transform hover:-translate-x-2 hover:-translate-y-2 hover:shadow-2xl shadow-lg shadow-zinc-700 flex flex-col">
+      <div className="p-6 sm:p-8 flex-grow flex flex-col justify-between border-[1px] rounded-lg border-white">
+        <div className="lg:text-4xl text-3xl font-medium text-black absolute top-2 left-2 font-sourcecodepro">
           {number.padStart(2, "0")}
         </div>
-        <div className="mt-8 sm:mt-12">
-          <h3 className="text-2xl sm:text-4xl font-medium text-black mb-2 sm:mb-4 font-SuisseIntlRegular text-left leading-tight">
+        <div className="mt-12 sm:mt-16 flex-grow">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-black mb-4 sm:mb-6 font-SuisseIntlRegular text-left leading-tight">
             {title}
           </h3>
-          <p className="text-[#fcfcfc] font-SuisseIntlRegular font-light text-left sm:text-xl">
+          <p className="text-gray-700 font-SuisseIntlRegular font-light text-left text-sm sm:text-base lg:text-xl">
             {description}
           </p>
         </div>
@@ -32,7 +32,7 @@ const SolutionPage = () => {
     },
     {
       title: "Long Term Efficiency",
-      description: "Designed for durability. Just install and chill back)",
+      description: "Designed for durability. Just install and chill back",
       number: "2",
     },
     {
@@ -64,15 +64,15 @@ const SolutionPage = () => {
       </div>
       <Navbar />
       <main className="relative container mx-auto px-4 py-16 text-center -mt-6">
-        <h2 className="text-5xl sm:text-7xl mt-24 mb-8 font-medium tracking-tight bg-gradient-to-r from-zinc-400 to-green-300 bg-clip-text text-transparent font-SuisseIntlRegular">
+        <h2 className="text-4xl sm:text-5xl lg:text-7xl mt-24 mb-8 font-medium tracking-tight bg-gradient-to-r from-zinc-400 to-green-300 bg-clip-text text-transparent font-SuisseIntlRegular">
           Solution
         </h2>
-        <p className="mb-16 max-w-2xl mx-auto text-zinc-300 leading-8 text-lg sm:text-xl">
-          We aim to use a novel technology that combines the power of the 2 most
-          extensively studied modes of disinfection. It enables us to disinfect
-          surfaces and air 100 times better and faster.
+        <p className="mb-16 max-w-2xl mx-auto text-zinc-300 leading-8 text-base sm:text-lg lg:text-xl">
+          We aim to use a novel technology that combines the power of the two
+          most extensively studied modes of disinfection. It enables us to
+          disinfect surfaces and air 100x better and faster.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
           {solutions.map((solution, index) => (
             <SolutionCard key={index} {...solution} />
           ))}

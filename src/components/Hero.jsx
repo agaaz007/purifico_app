@@ -39,8 +39,8 @@ const Hero = () => {
           The Future of Air Disinfection
         </h2>
         <p className="mb-8 max-w-2xl mx-auto text-zinc-300 leading-8 text-lg sm:text-xl">
-          Revolutionizing the way hand-dryers work. Our sustainable, affordable,
-          and clean hand-dryers eliminate the need for expensive and inefficient
+          Revolutionizing the way hand dryers work. Our sustainable, affordable,
+          and clean hand dryers eliminate the need for expensive and inefficient
           <br />
           HEPA filters
         </p>

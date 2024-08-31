@@ -62,7 +62,7 @@ const ResearchPage = () => {
           Research
         </h2>
         <p className="-mt-6 text-[#00AA37] font-medium font-SuisseIntlRegular text-lg sm:text-xl">
-          Tested under a conventional Hand-Dryer
+          Tested under a conventional hand dryer
         </p>
 
         {/* Image Carousel */}

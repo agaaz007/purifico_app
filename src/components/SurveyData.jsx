@@ -54,9 +54,16 @@ const SurveyData = () => {
     if (isTyping && currentIndex < surveyItems.length) {
       const timer = setTimeout(() => {
         setCurrentIndex(currentIndex + 1);
-      }, 1500); // Adjusted this value to speed up the delay between items
+      }, 500);
 
       return () => clearTimeout(timer);
+    } else if (currentIndex === surveyItems.length) {
+      const finishedTimer = setTimeout(() => {
+        const elements = document.querySelectorAll(".typing-effect");
+        elements.forEach((el) => el.classList.add("finished"));
+      }, 500);
+
+      return () => clearTimeout(finishedTimer);
     }
   }, [isTyping, currentIndex]);
 
@@ -88,7 +95,7 @@ const SurveyData = () => {
           ))}
         </div>
         <p className="text-center text-gray-400 mt-6 text-sm">
-          Sample size: 150 people.
+          Sample size: 150 people
         </p>
         <hr className="mt-4 opacity-20" />
       </div>
