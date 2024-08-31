@@ -58,17 +58,17 @@ const SolutionPage = () => {
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
       />
-      {/* Green elliptical gradient */}
+      {/* Gray gradient at the top */}
       <div className="absolute top-0 left-0 right-0 h-96 overflow-hidden">
-        <div className="w-full h-full bg-gradient-to-b from-green-500 to-transparent rounded-full transform scale-150 -translate-y-1/2 opacity-50"></div>
+        <div className="w-full h-full bg-gradient-to-b from-zinc-500 to-transparent rounded-full transform scale-150 -translate-y-1/2 opacity-50"></div>
       </div>
-      {/* Blue gradient at the bottom */}
+      {/* Green gradient at the bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-96 overflow-hidden">
-        <div className="w-full h-full bg-gradient-to-t from-blue-900 via-blue-600 to-transparent rounded-full transform scale-150 translate-y-1/2 opacity-50"></div>
+        <div className="w-full h-full bg-gradient-to-t from-green-600 to-transparent rounded-full transform scale-150 translate-y-1/2 opacity-50"></div>
       </div>
       <Navbar />
       <main className="relative container mx-auto px-4 py-16 text-center -mt-6">
-        <h2 className="text-4xl sm:text-5xl lg:text-7xl mt-24 mb-8 font-medium tracking-tight bg-gradient-to-r from-zinc-400 to-green-300 bg-clip-text text-transparent font-SuisseIntlRegular">
+        <h2 className="text-4xl sm:text-5xl lg:text-7xl mt-24 mb-8 font-medium tracking-tight bg-gradient-to-r from-green-200 to-zinc-400 bg-clip-text text-transparent font-SuisseIntlRegular">
           Solution
         </h2>
         <p className="mb-16 max-w-2xl mx-auto text-zinc-300 leading-8 text-base sm:text-lg lg:text-xl">

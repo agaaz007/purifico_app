@@ -13,7 +13,7 @@ const App = () => {
       <ProblemPage />
       <ResearchPage />
       <SolutionPage />
-      {/* <ThreeDModelPage />  */}
+      <ThreeDModelPage /> 
       <Footer />
     </div>
   );

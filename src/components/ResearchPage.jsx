@@ -58,10 +58,7 @@ const ResearchPage = () => {
       </div>
       <Navbar />
       <main className="relative container mx-auto px-4 py-8 sm:px-10 sm:py-16 text-center mt-4">
-        <h2
-          className="text-6xl mt-12 sm:text-7xl mb-4 sm:mb-8 font-medium tracking-tight font-SuisseIntlRegular bg-gradient-to-r from-white via-zinc-400 to-white bg-[length:200%_100%] text-transparent bg-clip-text"
-          style={{ backgroundPosition: "90% 0" }}
-        >
+        <h2 className="text-6xl mt-12 sm:text-7xl mb-4 sm:mb-8 font-medium tracking-tight font-SuisseIntlRegular bg-gradient-to-r from-white via-white to-blue-500 bg-[length:200%_100%] text-transparent bg-clip-text" style={{backgroundPosition: '90% 0'}}>
           Research
         </h2>
         <p className="-mt-6 text-[#00AA37] font-medium font-SuisseIntlRegular text-lg sm:text-xl">
