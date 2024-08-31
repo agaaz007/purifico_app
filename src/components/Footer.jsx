@@ -2,12 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-blue-900 to-black text-white py-8">
+    <footer className="bg-gradient-to-b from-blue-900 to-black text-zinc-300 py-8">
       <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <div className="mb-8 sm:mb-0">
           <h2 className="text-xl font-bold">PURIFICO</h2>
-          <p className="mt-2">+1 (7635) 547-12-97</p>
-          <p className="mt-1">support@purifico.com</p>
+          <p className="mt-1">agaazsinghal@gmail.com</p>
         </div>
         {/* Quick Links section removed */}
         <div className="mb-8 sm:mb-0">

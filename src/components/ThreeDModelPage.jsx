@@ -155,9 +155,9 @@ const ThreeDModelPage = () => {
       />
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-green-900/70 to-transparent" />
 
-      <main className="relative z-20 container mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center">
+      <main className="relative z-20 container mx-auto px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8 text-center">
         <h2
-          className="text-4xl sm:text-5xl lg:text-7xl mt-8 sm:mt-12 mb-4 sm:mb-6 font-medium tracking-tight font-SuisseIntlRegular bg-gradient-to-r from-white via-white to-blue-500 bg-[length:200%_100%] text-transparent bg-clip-text"
+          className="text-4xl sm:text-5xl lg:text-7xl mt-12 sm:mt-24 lg:mt-24 mb-4 sm:mb-6 font-medium tracking-tight font-SuisseIntlRegular bg-gradient-to-r from-white via-white to-blue-500 bg-[length:200%_100%] text-transparent bg-clip-text"
           style={{ backgroundPosition: "90% 0" }}
         >
           Purifico Hand Dryers
@@ -167,6 +167,9 @@ const ThreeDModelPage = () => {
           friendly product that makes a difference in people's lives. We believe
           that small changes can lead to big impacts, and that's why we're
           excited to share our latest innovation with you.
+        </p>
+        <p className="mb-2 max-w-4xl mx-auto text-zinc-300 leading-7 sm:leading-8 text-base sm:text-lg lg:text-xl">
+          Patent Pending
         </p>
         <div
           ref={mountRef}

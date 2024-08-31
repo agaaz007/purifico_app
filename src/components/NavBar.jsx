@@ -32,23 +32,60 @@ const NavBar = () => {
   }, [prevScrollPos]);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-30 bg-black transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-30 bg-black transition-transform duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           <div className="flex-shrink-0">
-            <span className="text-white text-3xl font-bold">PURIFICO</span>
+            <a href="/" className="text-white text-3xl font-bold">
+              PURIFICO
+            </a>
           </div>
           <div className="hidden lg:block flex-grow">
             <div className="ml-20 flex items-baseline space-x-12 justify-end">
-              <a href="#" className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium">Home</a>
-              <a href="#problem" className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium">Problem</a>
-              <a href="#solution" className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium">Solution</a>
-              <a href="#" className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium">Contact Us</a>
-              <button className="bg-blue-800 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-xl font-medium transition-all duration-300 ease-out hover:scale-110">Sign Up</button>
+              <a
+                href="/"
+                className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium"
+              >
+                Home
+              </a>
+              <a
+                href="/#problem"
+                className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium"
+              >
+                Problem
+              </a>
+              <a
+                href="/#solution"
+                className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium"
+              >
+                Solution
+              </a>
+              <a
+                href="/team"
+                className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium"
+              >
+                Team
+              </a>
+              <a
+                href="/#contact"
+                className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium"
+              >
+                Contact Us
+              </a>
+              <button className="bg-blue-800 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-xl font-medium transition-all duration-300 ease-out hover:scale-110">
+                Sign Up
+              </button>
             </div>
           </div>
           <div className="lg:hidden">
-            <button onClick={toggleMenu} className="text-white focus:outline-none">
+            <button
+              onClick={toggleMenu}
+              className="text-white focus:outline-none"
+            >
               {isOpen ? (
                 <i className="fas fa-times text-2xl"></i>
               ) : (
@@ -61,11 +98,39 @@ const NavBar = () => {
       {isMobile && isOpen && (
         <div className="lg:hidden">
           <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3">
-            <a href="#" className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium">Home</a>
-            <a href="#problem" className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium">Problem</a>
-            <a href="#solution" className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium">Solution</a>
-            <a href="#" className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium">Contact Us</a>
-            <button className="bg-blue-800 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-xl font-medium transition-all duration-300 ease-out hover:scale-110 w-full mt-2">Sign Up</button>
+            <a
+              href="/"
+              className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium"
+            >
+              Home
+            </a>
+            <a
+              href="/#problem"
+              className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium"
+            >
+              Problem
+            </a>
+            <a
+              href="/#solution"
+              className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium"
+            >
+              Solution
+            </a>
+            <a
+              href="/team"
+              className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium"
+            >
+              Team
+            </a>
+            <a
+              href="/#contact"
+              className="text-white hover:text-gray-300 block px-6 py-2 rounded-md text-xl font-medium"
+            >
+              Contact Us
+            </a>
+            <button className="bg-blue-800 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-xl font-medium transition-all duration-300 ease-out hover:scale-110 w-full mt-2">
+              Sign Up
+            </button>
           </div>
         </div>
       )}
