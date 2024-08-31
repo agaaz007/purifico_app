@@ -45,7 +45,7 @@ const NavBar = () => {
             </a>
           </div>
           <div className="hidden xl:block flex-grow"> {/* Changed lg to xl */}
-            <div className="ml-20 flex items-baseline space-x-12 justify-end">
+            <div className="ml-20 flex items-center space-x-8 justify-end"> {/* Updated space-x and added items-center */}
               <a
                 href="/"
                 className="text-white hover:text-gray-300 px-6 py-2 rounded-md text-lg font-medium"
@@ -76,7 +76,7 @@ const NavBar = () => {
               >
                 Contact Us
               </a>
-              <div className="pl-4">
+              <div className="pl-4"> {/* Added padding to the left of the button */}
                 <button className="bg-blue-800 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-xl font-medium transition-all duration-300 ease-out hover:scale-110">
                   Sign Up
                 </button>

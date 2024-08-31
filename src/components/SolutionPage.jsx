@@ -2,7 +2,6 @@ import React from "react";
 import backgroundImage from "../assets/Texturebg.png";
 import Navbar from "./NavBar";
 
-
 const SolutionCard = ({ title, description, number }) => {
   return (
     <div className="relative w-full h-full bg-gradient-to-b from-[#ddf8d4] via-[#aefd98] to-[#5fb345] rounded-lg overflow-hidden transition-all duration-300 transform hover:-translate-x-2 hover:-translate-y-2 hover:shadow-2xl shadow-lg shadow-zinc-700 flex flex-col">
@@ -87,16 +86,20 @@ const SolutionPage = () => {
         <div className="mt-16 flex items-center justify-center flex-wrap gap-8">
           <p className="text-zinc-300 text-xl mr-8">Backed by</p>
           <div className="flex items-center flex-wrap gap-8">
-            <img
-              src="https://i.postimg.cc/ZnG8RKKd/emergentventures.webp"
-              alt="Falling Walls"
-              className="h-12 sm:h-16 md:h-20 object-contain opacity-80"
-            />
-            <img
-              src="https://svgshare.com/i/19tz.svg  x"
-              alt="Emergent Ventures"
-              className="h-12 sm:h-16 md:h-20 object-contain opacity-80"
-            />
+            <a href="https://www.mercatus.org/emergent-ventures" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://i.postimg.cc/qRCxLtRz/capture-decran-2023-01-20-105452.png"
+                alt="Emergent Ventures"
+                className="h-12 sm:h-16 md:h-20 object-contain opacity-80"
+              />
+            </a>
+            <a href="https://falling-walls.com/lab/" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://svgshare.com/i/19tz.svg"
+                alt="Falling Walls Lab"
+                className="h-12 sm:h-16 md:h-20 object-contain opacity-80"
+              />
+            </a>
           </div>
         </div>
       </main>
