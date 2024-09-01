@@ -98,23 +98,58 @@
   }
 }
 
-.typing-effect {
+.typing-effect-1,
+.typing-effect-2 {
   display: inline-block;
   overflow: hidden;
-  border-right: 2px solid white;
   white-space: nowrap;
   margin: 0 auto;
   letter-spacing: 0.15em;
-  animation: typing 1s steps(40, end),
-    /* Adjusted duration to 1.5s */ blink 0.75s step-end infinite;
 }
 
-.text-8xl .typing-effect {
-  animation-duration: 1s; /* Adjusted duration to 1s */
+.typing-effect-1 {
+  width: 0;
+  border-right: 2px solid white;
+  animation: typing1 1.5s steps(40, end) forwards,
+    blink1 0.75s step-end infinite;
 }
 
-.typing-effect.finished {
-  border-right: none; /* Hide cursor when finished */
+.typing-effect-2 {
+  width: 0;
+  visibility: hidden;
+  border-right: 2px solid white;
+  animation: typing2 1.5s steps(40, end) forwards,
+    blink2 0.75s step-end infinite;
+}
+
+@keyframes typing1 {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes typing2 {
+  from { 
+    width: 0;
+    visibility: visible;
+  }
+  to { 
+    width: 100%;
+    visibility: visible;
+  }
+}
+
+@keyframes blink1 {
+  50% { border-color: transparent }
+}
+
+@keyframes blink2 {
+  50% { border-color: transparent }
+}
+
+.typing-effect-1.finished,
+.typing-effect-2.finished {
+  border-right: none;
+  width: 100%;
 }
 
 @media (max-width: 640px) {

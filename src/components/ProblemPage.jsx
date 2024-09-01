@@ -5,7 +5,8 @@ import NewsCardGrid from "./NewsCardGrid";
 import SurveyData from "./SurveyData";
 
 const ProblemPage = () => {
-  const textRef = useRef(null);
+  const textRef1 = useRef(null);
+  const textRef2 = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -16,30 +17,40 @@ const ProblemPage = () => {
       { threshold: 0.1 }
     );
 
-    if (textRef.current) {
-      observer.observe(textRef.current);
+    if (textRef1.current) {
+      observer.observe(textRef1.current);
     }
 
     return () => {
-      if (textRef.current) {
-        observer.unobserve(textRef.current);
+      if (textRef1.current) {
+        observer.unobserve(textRef1.current);
       }
     };
   }, []);
 
   useEffect(() => {
-    if (isVisible && textRef.current) {
-      textRef.current.classList.add("typing-effect");
-      const timer = setTimeout(() => {
-        textRef.current.classList.add("finished");
-      }, 3500); // Match this to the duration of your typing animation
-
-      return () => {
-        clearTimeout(timer);
-        if (textRef.current) {
-          textRef.current.classList.remove("typing-effect", "finished");
-        }
-      };
+    if (isVisible) {
+      if (textRef1.current) {
+        textRef1.current.classList.add("typing-effect-1");
+        setTimeout(() => {
+          textRef1.current.classList.add("finished");
+          if (textRef2.current) {
+            textRef2.current.style.visibility = 'visible';
+            textRef2.current.classList.add("typing-effect-2");
+            setTimeout(() => {
+              textRef2.current.classList.add("finished");
+            }, 1500);
+          }
+        }, 1500);
+      }
+    } else {
+      if (textRef1.current) {
+        textRef1.current.classList.remove("typing-effect-1", "finished");
+      }
+      if (textRef2.current) {
+        textRef2.current.classList.remove("typing-effect-2", "finished");
+        textRef2.current.style.visibility = 'hidden';
+      }
     }
   }, [isVisible]);
 
@@ -91,14 +102,14 @@ const ProblemPage = () => {
         </p>
         <NewsCardGrid />
         <div className="max-w-3xl mx-auto">
-          {" "}
-          {/* Container for the text */}
-          <h1
-            ref={textRef}
-            className="text-xs sm:text-sm md:text-base lg:text-lg font-helvetica inline-block"
-          >
-            Are you unknowingly spreading bacteria every time you dry your
-            hands?
+          <h1 className="text-xs sm:text-sm md:text-base lg:text-lg font-helvetica inline-block">
+            <span ref={textRef1} className="typing-effect-1">
+              Are you unknowingly spreading bacteria
+            </span>
+            <br />
+            <span ref={textRef2} className="typing-effect-2" style={{visibility: 'hidden'}}>
+              every time you dry your hands?
+            </span>
           </h1>
         </div>
         <h2 className="text-xl font-helvetica mt-4">Know More</h2>
