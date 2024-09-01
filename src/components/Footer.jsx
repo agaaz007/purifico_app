@@ -11,7 +11,10 @@ const Footer = () => {
         {/* Quick Links section removed */}
         <div className="mb-8 sm:mb-0">
           <div className="mt-2 flex">
-            <button className="relative inline-flex items-center px-6 py-3 text-white bg-gradient-to-tr from-black via-black to-gray-800 border border-blue-600 rounded-full transition-shadow duration-300 ease-in-out group hover:shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+            <a
+              href="mailto:agaazsinghal@gmail.com"
+              className="relative inline-flex items-center px-6 py-3 text-white bg-gradient-to-tr from-black via-black to-gray-800 border border-blue-600 rounded-full transition-shadow duration-300 ease-in-out group hover:shadow-[0_0_15px_rgba(37,99,235,0.5)]"
+            >
               <span className="relative flex items-center space-x-2">
                 <span className="font-helvetica">Contact Us</span>
                 <svg
@@ -29,7 +32,7 @@ const Footer = () => {
                   />
                 </svg>
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

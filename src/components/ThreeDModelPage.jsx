@@ -57,7 +57,7 @@ const ThreeDModelPage = () => {
         const textGeometry = new TextGeometry("Revealing soon", {
           font: font,
           size: 0.2,
-          height: 0.03,
+          depth: 0.03, // Changed from 'height' to 'depth'
           curveSegments: 12,
           bevelEnabled: false,
         });

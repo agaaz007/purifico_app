@@ -1,8 +1,47 @@
+import { useState } from 'react';
 import spheresImage from "../assets/img.png";
 import backgroundImage from "../assets/Texturebg.png";
 import Navbar from "./NavBar";
 
 const Hero = () => {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setError('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        alert('Thank you for subscribing!');
+        setEmail('');
+      } else {
+        setError('An error occurred. Please try again.');
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
+    }
+  };
+
   return (
     <div className="relative text-white min-h-screen overflow-hidden">
       <div
@@ -45,16 +84,19 @@ const Hero = () => {
           <br />
           HEPA filters
         </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center mb-8">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row justify-center items-center mb-8">
           <input
             type="email"
             placeholder="Enter email"
+            value={email}
+            onChange={handleEmailChange}
             className="px-4 py-2 rounded-xl text-zinc-200 bg-zinc-800 border border-zinc-800 mb-4 sm:mb-0 sm:mr-2 w-full sm:w-1/4"
           />
-          <button className="w-3/4 bg-blue-800 rounded-xl text-white px-4 py-2 hover:shadow-lg transition-transform transform hover:scale-105 hover:bg-blue-600 sm:w-auto">
+          <button type="submit" className="w-3/4 bg-blue-800 rounded-xl text-white px-4 py-2 hover:shadow-lg transition-transform transform hover:scale-105 hover:bg-blue-600 sm:w-auto">
             Sign Up Now
           </button>
-        </div>
+        </form>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="relative h-48 mt-20 sm:h-96 w-5/5 rounded-4xl sm:w-4/5 mx-auto rounded-full flex justify-center items-center overflow-hidden shadow-lg">
           <img
             src={spheresImage}
