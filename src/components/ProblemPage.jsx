@@ -85,7 +85,7 @@ const ProblemPage = () => {
 
         <p className="mb-8 max-w-2xl mx-auto text-zinc-300 leading-8 text-lg sm:text-xl">
           The traditional hand dryers available in the market spread
-          <span className="text-red-600"> pathogenic bacterial-laden air </span>
+          <span className="text-red-600"> pathogenic bacteria-laden air </span>
           and at times even faecal matter onto the user's hand, which is disease
           causing.
         </p>

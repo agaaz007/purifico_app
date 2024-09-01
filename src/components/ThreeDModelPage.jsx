@@ -57,14 +57,21 @@ const ThreeDModelPage = () => {
         const textGeometry = new TextGeometry("Revealing soon", {
           font: font,
           size: 0.2,
-          height: 0.05,
+          height: 0.03,
           curveSegments: 12,
           bevelEnabled: false,
         });
         const textMaterial = new THREE.MeshPhongMaterial({ color: 0x4da6ff });
         const textMesh = new THREE.Mesh(textGeometry, textMaterial);
 
-        textMesh.position.set(-0.8, 0, 3.2); // Positioning text closer to the camera and in front of the cube
+        // Center the text geometry
+        textGeometry.computeBoundingBox();
+        const textWidth =
+          textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
+        const textHeight =
+          textGeometry.boundingBox.max.y - textGeometry.boundingBox.min.y;
+
+        textMesh.position.set(-textWidth / 2, -textHeight / 2, 1.5); // Position in front of the cube
         scene.add(textMesh);
       }
     );
