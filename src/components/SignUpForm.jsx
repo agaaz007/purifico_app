@@ -11,13 +11,16 @@ const SignUpForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:3000/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: data.email, name: data.name }), // Include name
-      });
+      const response = await fetch(
+        "http://ec2-13-60-105-174.eu-north-1.compute.amazonaws.com:3000/api/subscribe",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: data.email, name: data.name }), // Include name
+        }
+      );
 
       if (response.ok) {
         alert("Subscription successful");
