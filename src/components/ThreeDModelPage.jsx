@@ -202,7 +202,7 @@ const ThreeDModelPage = () => {
         </p>
         <div
           ref={mountRef}
-          className="w-full sm:w-4/5 lg:w-3/5 h-[300px] sm:h-[400px] lg:h-[500px] mx-auto bg-zinc-800/50 rounded-lg shadow-lg"
+          className="w-full sm:w-4/5 lg:w-3/5 h-[300px] sm:h-[400px] lg:h-[500px] mx-auto bg-transparent rounded-lg shadow-lg"
           style={{ userSelect: "none", touchAction: "none" }}
         />
         <p className="mt-4 text-zinc-300 text-sm sm:text-base lg:text-lg">

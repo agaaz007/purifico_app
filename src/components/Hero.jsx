@@ -1,44 +1,45 @@
-import { useState } from 'react';
+import { useState } from "react";
 import spheresImage from "../assets/img.png";
 import backgroundImage from "../assets/Texturebg.png";
 import Navbar from "./NavBar";
 
 const Hero = () => {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    setError('');
+    setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address');
+      setError("Please enter a valid email address");
       return;
     }
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/api/subscribe", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email }), // Only email
       });
 
       if (response.ok) {
-        alert('Thank you for subscribing!');
-        setEmail('');
+        alert("Thank you for subscribing!");
+        setEmail("");
       } else {
-        setError('An error occurred. Please try again.');
+        const errorMessage = await response.text();
+        setError(`An error occurred: ${errorMessage}`);
       }
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      setError(`An error occurred: ${error.message}`);
     }
   };
 
@@ -84,7 +85,10 @@ const Hero = () => {
           <br />
           HEPA filters
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row justify-center items-center mb-8">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row justify-center items-center mb-8"
+        >
           <input
             type="email"
             placeholder="Enter email"
@@ -92,7 +96,10 @@ const Hero = () => {
             onChange={handleEmailChange}
             className="px-4 py-2 rounded-xl text-zinc-200 bg-zinc-800 border border-zinc-800 mb-4 sm:mb-0 sm:mr-2 w-full sm:w-1/4"
           />
-          <button type="submit" className="w-3/4 bg-blue-800 rounded-xl text-white px-4 py-2 hover:shadow-lg transition-transform transform hover:scale-105 hover:bg-blue-600 sm:w-auto">
+          <button
+            type="submit"
+            className="w-3/4 bg-blue-800 rounded-xl text-white px-4 py-2 hover:shadow-lg transition-transform transform hover:scale-105 hover:bg-blue-600 sm:w-auto"
+          >
             Sign Up Now
           </button>
         </form>

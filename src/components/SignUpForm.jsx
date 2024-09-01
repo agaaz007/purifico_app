@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { post } from "aws-amplify/api";
 import Navbar from "./NavBar";
 
 const SignUpForm = () => {
@@ -12,17 +11,22 @@ const SignUpForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await post({
-        apiName: "signUpApi",
-        path: "/signup",
-        options: {
-          body: data
-        }
+      const response = await fetch("http://localhost:3000/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: data.email, name: data.name }), // Include name
       });
-      alert("Sign up successful!");
+
+      if (response.ok) {
+        alert("Subscription successful");
+      } else {
+        alert("Subscription failed");
+      }
     } catch (error) {
-      console.error("Error signing up:", error);
-      alert("Error signing up. Please try again.");
+      console.error("Error subscribing:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
@@ -35,7 +39,10 @@ const SignUpForm = () => {
             <h2 className="text-3xl font-bold mb-6 text-center">Sign Up</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium mb-1"
+                >
                   Name
                 </label>
                 <input
@@ -45,11 +52,16 @@ const SignUpForm = () => {
                   className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium mb-1"
+                >
                   Email
                 </label>
                 <input
@@ -65,7 +77,9 @@ const SignUpForm = () => {
                   className="w-full px-3 py-2 bg-zinc-700 border border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
               <button
