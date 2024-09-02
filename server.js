@@ -10,7 +10,7 @@ const port = 3000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://ec2-13-60-105-174.eu-north-1.compute.amazonaws.com:3000",
+    origin: "https://ec2-13-51-206-194.eu-north-1.compute.amazonaws.com:3000/",
   })
 );
 app.use(bodyParser.json());
