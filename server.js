@@ -8,9 +8,11 @@ const port = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-  origin: 'http://ec2-13-60-105-174.eu-north-1.compute.amazonaws.com:3000'
-}));
+app.use(
+  cors({
+    origin: "https://ec2-13-60-105-174.eu-north-1.compute.amazonaws.com:3000",
+  })
+);
 app.use(bodyParser.json());
 
 // Configure AWS SDK
@@ -31,9 +33,7 @@ const ensureTableExists = async () => {
     KeySchema: [
       { AttributeName: "email", KeyType: "HASH" }, // Partition key
     ],
-    AttributeDefinitions: [
-      { AttributeName: "email", AttributeType: "S" },
-    ],
+    AttributeDefinitions: [{ AttributeName: "email", AttributeType: "S" }],
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
       WriteCapacityUnits: 5,
@@ -56,22 +56,22 @@ const ensureTableExists = async () => {
 ensureTableExists();
 
 // Add the /api/subscribe route
-app.post('/api/subscribe', async (req, res) => {
+app.post("/api/subscribe", async (req, res) => {
   const { email, name } = req.body;
   const params = {
     TableName: TABLE_NAME,
     Item: {
       email: email,
-      name: name
-    }
+      name: name,
+    },
   };
 
   try {
     await dynamoDb.put(params).promise();
-    res.status(200).json({ message: 'Subscription successful' });
+    res.status(200).json({ message: "Subscription successful" });
   } catch (error) {
-    console.error('Error subscribing:', error);
-    res.status(500).json({ error: 'Subscription failed' });
+    console.error("Error subscribing:", error);
+    res.status(500).json({ error: "Subscription failed" });
   }
 });
 
