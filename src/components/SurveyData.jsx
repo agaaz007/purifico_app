@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 
 const SurveyData = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(-1);
   const [isTyping, setIsTyping] = useState(false);
   const containerRef = useRef(null);
 
@@ -54,7 +54,7 @@ const SurveyData = () => {
     if (isTyping && currentIndex < surveyItems.length) {
       const timer = setTimeout(() => {
         setCurrentIndex(currentIndex + 1);
-      }, 500);
+      }, 1500); // Adjusted delay to match the typing animation duration
 
       return () => clearTimeout(timer);
     } else if (currentIndex === surveyItems.length) {
@@ -78,10 +78,10 @@ const SurveyData = () => {
           {surveyItems.map((item, index) => (
             <div key={index} className="p-6 rounded-lg h-48">
               <div className="text-8xl font-bold mb-2 font-SuisseIntlRegular h-24 break-words whitespace-normal">
-                {index < currentIndex && (
+                {index <= currentIndex && (
                   <span
                     className={`typing-effect ${
-                      index === currentIndex - 1 ? "cursor-blink" : "finished"
+                      index === currentIndex ? "cursor-blink" : "finished"
                     }`}
                   >
                     {item.percentage}%
