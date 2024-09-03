@@ -2,10 +2,12 @@ import { useState } from "react";
 import spheresImage from "../assets/img.png";
 import backgroundImage from "../assets/Texturebg.png";
 import Navbar from "./NavBar";
+import Notification from "./Notification";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [notification, setNotification] = useState(null);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -35,7 +37,7 @@ const Hero = () => {
       );
 
       if (response.ok) {
-        alert("Thank you for subscribing!");
+        setNotification("Thank you for subscribing!");
         setEmail("");
       } else {
         const errorMessage = await response.text();
@@ -120,6 +122,12 @@ const Hero = () => {
         <div className="w-[150%] h-full bg-blue-600 rounded-full filter blur-3xl opacity-30 absolute left-1/2 transform -translate-x-1/2"></div>
       </div>
       <hr className="opacity-5" />
+      {notification && (
+        <Notification
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
     </div>
   );
 };
