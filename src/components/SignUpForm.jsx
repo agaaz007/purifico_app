@@ -12,13 +12,13 @@ const SignUpForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await fetch(
-        "https://cksg7lscm2.execute-api.eu-north-1.amazonaws.com/prod/subscribers", // Updated API endpoint URL
+        "https://o47wxqrf5i.execute-api.eu-north-1.amazonaws.com/prod/HandleSubscribe",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email: data.email, name: data.name }), // Include name
+          body: JSON.stringify({ email: data.email, name: data.name }),
         }
       );
 

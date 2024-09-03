@@ -24,7 +24,7 @@ const Hero = () => {
 
     try {
       const response = await fetch(
-        "https://cksg7lscm2.execute-api.eu-north-1.amazonaws.com/prod/api/subscribe",
+        "https://o47wxqrf5i.execute-api.eu-north-1.amazonaws.com/prod/HandleSubscribe",
         {
           method: "POST",
           headers: {
