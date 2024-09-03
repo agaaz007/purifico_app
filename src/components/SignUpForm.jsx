@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await fetch(
-        "https://ec2-13-51-206-194.eu-north-1.compute.amazonaws.com:3000/api/subscribe",
+        "https://cksg7lscm2.execute-api.eu-north-1.amazonaws.com/prod/subscribers", // Updated API endpoint URL
         {
           method: "POST",
           headers: {

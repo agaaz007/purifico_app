@@ -23,13 +23,16 @@ const Hero = () => {
     }
 
     try {
-      const response = await fetch("https://ec2-13-51-206-194.eu-north-1.compute.amazonaws.com:3000/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }), // Only email
-      });
+      const response = await fetch(
+        "https://cksg7lscm2.execute-api.eu-north-1.amazonaws.com/prod/api/subscribe",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, name: "landing page" }), // Send email with default name
+        }
+      );
 
       if (response.ok) {
         alert("Thank you for subscribing!");
