@@ -11,7 +11,7 @@ const SurveyData = () => {
       description: "people use hand-dryers to dry their hands",
     },
     {
-      percentage: 85,
+      percentage: 84,
       description: "don't know about the potential threats of a hand-dryer",
     },
     {
@@ -20,7 +20,7 @@ const SurveyData = () => {
         "found it very discomforting after they got to know about the fact",
     },
     {
-      percentage: 85,
+      percentage: 87,
       description:
         "people were ready to spend a few extra seconds for clean air",
     },
@@ -54,14 +54,14 @@ const SurveyData = () => {
     if (isTyping && currentIndex < surveyItems.length) {
       const timer = setTimeout(() => {
         setCurrentIndex(currentIndex + 1);
-      }, 1500); // Adjusted delay to match the typing animation duration
+      }, 1000);
 
       return () => clearTimeout(timer);
     } else if (currentIndex === surveyItems.length) {
       const finishedTimer = setTimeout(() => {
         const elements = document.querySelectorAll(".typing-effect");
         elements.forEach((el) => el.classList.add("finished"));
-      }, 500);
+      }, 1000);
 
       return () => clearTimeout(finishedTimer);
     }

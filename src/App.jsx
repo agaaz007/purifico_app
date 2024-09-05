@@ -13,7 +13,6 @@ const HomePage = () => (
   <>
     <Hero />
     <ProblemPage />
-    <ResearchPage />
     <SolutionPage />
     <ThreeDModelPage />
     <Footer />

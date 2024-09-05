@@ -11,8 +11,8 @@ const ResearchPage = () => {
     "https://i.postimg.cc/rpdySz7d/research2.jpg",
   ];
   const imageTexts = [
-    "Tested at Plaksha, in the dining hall for 10s exposure",
-    "Tested at Plaksha, 2nd floor student residence for 10s exposure",
+    "Tested at Plaksha University, in the dining hall for 10s exposure",
+    "Tested at Plaksha University, 2nd floor student residence for 10s exposure",
   ];
 
   const nextImage = () => {

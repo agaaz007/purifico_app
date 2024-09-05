@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import backgroundImage from "../assets/Texturebg.png";
 import Navbar from "./NavBar";
 import NewsCardGrid from "./NewsCardGrid";
-import SurveyData from "./SurveyData";
-
+import ResearchPage from "./ResearchPage";
 const ProblemPage = () => {
   const textRef1 = useRef(null);
   const textRef2 = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const nextSectionRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,7 +35,7 @@ const ProblemPage = () => {
         setTimeout(() => {
           textRef1.current.classList.add("finished");
           if (textRef2.current) {
-            textRef2.current.style.visibility = 'visible';
+            textRef2.current.style.visibility = "visible";
             textRef2.current.classList.add("typing-effect-2");
             setTimeout(() => {
               textRef2.current.classList.add("finished");
@@ -49,10 +49,16 @@ const ProblemPage = () => {
       }
       if (textRef2.current) {
         textRef2.current.classList.remove("typing-effect-2", "finished");
-        textRef2.current.style.visibility = 'hidden';
+        textRef2.current.style.visibility = "hidden";
       }
     }
   }, [isVisible]);
+
+  const handleArrowClick = () => {
+    if (nextSectionRef.current) {
+      nextSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div
@@ -107,16 +113,24 @@ const ProblemPage = () => {
               Are you unknowingly spreading bacteria
             </span>
             <br />
-            <span ref={textRef2} className="typing-effect-2" style={{visibility: 'hidden'}}>
+            <span
+              ref={textRef2}
+              className="typing-effect-2"
+              style={{ visibility: "hidden" }}
+            >
               every time you dry your hands?
             </span>
           </h1>
         </div>
         <h2 className="text-xl font-helvetica mt-4">Know More</h2>
+        <div className="absolute -mt-32 left-0 right-0 h-32 sm:h-48">
+          <div className="w-[150%] h-full bg-green-600 rounded-full mt-16 filter blur-3xl opacity-30 absolute left-1/2 transform -translate-x-1/2"></div>
+        </div>
         {/* Custom Bouncing Arrow */}
-        <div className="mt-2 mb-16">
+        <div className="mt-2 ">
           <span
-            className="text-3xl"
+            className="text-3xl cursor-pointer"
+            onClick={handleArrowClick}
             style={{
               display: "inline-block",
               animation: "bounce 1.5s infinite",
@@ -127,8 +141,10 @@ const ProblemPage = () => {
           </span>
         </div>
       </main>
-      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-48">
-        <div className="w-[150%] h-full bg-green-600 rounded-full mt-16 filter blur-3xl opacity-40 absolute left-1/2 transform -translate-x-1/2"></div>
+
+      <div ref={nextSectionRef} className="min-h-screen bg-gray-900">
+        <ResearchPage />
+        {/* Add more content as needed */}
       </div>
     </div>
   );
