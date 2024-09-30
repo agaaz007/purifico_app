@@ -28,7 +28,7 @@ const ThreeDModelPage = () => {
 
     // Load the STL model
     const loader = new STLLoader();
-    loader.load("/Cavity Hand Dryer v4.stl", (geometry) => {
+    loader.load("/public/model.stl", (geometry) => {
       // Compute bounding box to center the model
       geometry.computeBoundingBox();
       geometry.center(); // Center the model geometry
@@ -38,7 +38,7 @@ const ThreeDModelPage = () => {
       const mesh = new THREE.Mesh(geometry, material);
 
       // Adjust scale and rotation to make it upright and oriented correctly
-      mesh.scale.set(0.01, 0.01, 0.01); // Scale it down further
+      mesh.scale.set(0.04, 0.04, 0.04); // Scale it down further
       mesh.rotation.set(0, Math.PI / 2, 0, Math.PI); // Correct orientation
 
       scene.add(mesh);
