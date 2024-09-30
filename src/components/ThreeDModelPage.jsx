@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import backgroundImage from "../assets/background2.jpg";
 
 const ThreeDModelPage = () => {
@@ -9,7 +8,7 @@ const ThreeDModelPage = () => {
   const [isDragging, setIsDragging] = useState(false);
   const rotation = useRef({ x: 0, y: 0 });
   const prevPosition = useRef({ x: 0, y: 0 });
-  const autoRotationSpeed = 0.003;
+  const autoRotationSpeed = 0.006; // Slower rotation speed
   const autoRotationRef = useRef(true);
 
   useEffect(() => {
@@ -27,64 +26,47 @@ const ThreeDModelPage = () => {
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
-    // Set up a basic cube (you can replace this with your 3D model later)
-    const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // Load the STL model
+    const loader = new STLLoader();
+    loader.load("/src/assets/Cavity Hand Dryer v4.stl", (geometry) => {
+      // Compute bounding box to center the model
+      geometry.computeBoundingBox();
+      geometry.center(); // Center the model geometry
 
-    // Add directional light from the front-top
+      // Create the mesh with material
+      const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+      const mesh = new THREE.Mesh(geometry, material);
+
+      // Adjust scale and rotation to make it upright and oriented correctly
+      mesh.scale.set(0.01, 0.01, 0.01); // Scale it down further
+      mesh.rotation.set(0, Math.PI / 2, 0, Math.PI); // Correct orientation
+
+      scene.add(mesh);
+
+      camera.position.z = 10; // Move camera further back
+    });
+
+    // Add lights
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(0, 3, 5);
     scene.add(directionalLight);
 
-    // Add a softer fill light from the opposite side
     const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
     fillLight.position.set(0, 1, -3);
     scene.add(fillLight);
 
-    // Add ambient light for overall illumination
     const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
     scene.add(ambientLight);
-
-    camera.position.z = 5;
-
-    // Add text "Revealing soon"
-    const loader = new FontLoader();
-    loader.load(
-      "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
-      (font) => {
-        const textGeometry = new TextGeometry("Revealing soon", {
-          font: font,
-          size: 0.2,
-          depth: 0.03, // Changed from 'height' to 'depth'
-          curveSegments: 12,
-          bevelEnabled: false,
-        });
-        const textMaterial = new THREE.MeshPhongMaterial({ color: 0x4da6ff });
-        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-
-        // Center the text geometry
-        textGeometry.computeBoundingBox();
-        const textWidth =
-          textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x;
-        const textHeight =
-          textGeometry.boundingBox.max.y - textGeometry.boundingBox.min.y;
-
-        textMesh.position.set(-textWidth / 2, -textHeight / 2, 1.5); // Position in front of the cube
-        scene.add(textMesh);
-      }
-    );
 
     const startDragging = (clientX, clientY) => {
       setIsDragging(true);
       prevPosition.current = { x: clientX, y: clientY };
-      autoRotationRef.current = false; // Disable auto-rotation on interaction
+      autoRotationRef.current = false;
     };
 
     const stopDragging = () => {
       setIsDragging(false);
-      autoRotationRef.current = true; // Re-enable auto-rotation after interaction
+      autoRotationRef.current = true;
     };
 
     const drag = (clientX, clientY) => {
@@ -103,7 +85,7 @@ const ThreeDModelPage = () => {
     // Mouse event listeners
     const onMouseDown = (event) => {
       startDragging(event.clientX, event.clientY);
-      autoRotationRef.current = false; // Disable auto-rotation on interaction
+      autoRotationRef.current = false;
     };
 
     const onMouseMove = (event) => {
@@ -112,7 +94,7 @@ const ThreeDModelPage = () => {
 
     const onMouseUp = () => {
       stopDragging();
-      autoRotationRef.current = true; // Re-enable auto-rotation after interaction
+      autoRotationRef.current = true;
     };
 
     // Touch event listeners
@@ -145,8 +127,11 @@ const ThreeDModelPage = () => {
       if (!isDragging && autoRotationRef.current) {
         rotation.current.y += autoRotationSpeed;
       }
-      cube.rotation.x = rotation.current.x;
-      cube.rotation.y = rotation.current.y;
+
+      // Apply rotation to the entire scene
+      scene.rotation.x = rotation.current.x;
+      scene.rotation.y = rotation.current.y;
+
       renderer.render(scene, camera);
     };
     animate();
@@ -205,12 +190,7 @@ const ThreeDModelPage = () => {
           className="w-full sm:w-4/5 lg:w-3/5 h-[300px] sm:h-[400px] lg:h-[500px] mx-auto bg-transparent rounded-lg shadow-lg"
           style={{ userSelect: "none", touchAction: "none" }}
         />
-        <p className="mt-4 text-zinc-300 text-sm sm:text-base lg:text-lg">
-          Rendering of 3D model of Purifico Hand Dryer
-        </p>
       </main>
-
-      <div className="absolute -bottom-5 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-blue-900 to-transparent z-30" />
     </div>
   );
 };
