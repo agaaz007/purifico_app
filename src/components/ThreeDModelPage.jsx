@@ -28,7 +28,7 @@ const ThreeDModelPage = () => {
 
     // Load the STL model
     const loader = new STLLoader();
-    loader.load("/src/assets/Cavity Hand Dryer v4.stl", (geometry) => {
+    loader.load("/Cavity Hand Dryer v4.stl", (geometry) => {
       // Compute bounding box to center the model
       geometry.computeBoundingBox();
       geometry.center(); // Center the model geometry
