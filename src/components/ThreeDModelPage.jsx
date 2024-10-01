@@ -41,7 +41,7 @@ const ThreeDModelPage = () => {
     // Load GLTF model
     const loader = new GLTFLoader();
     loader.load(
-      "/threejs v3.gltf", // Make sure this path is correct
+      "/threejs.gltf", // Make sure this path is correct
       (gltf) => {
         const model = gltf.scene;
         modelRef.current = model; // Store model reference
