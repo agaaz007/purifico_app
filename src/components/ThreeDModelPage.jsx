@@ -6,7 +6,6 @@ import backgroundImage from "../assets/background2.jpg";
 const ThreeDModelPage = () => {
   const mountRef = useRef(null);
   const [modelLoaded, setModelLoaded] = useState(false);
-  const [debugInfo, setDebugInfo] = useState("");
   const modelRef = useRef(null); // Store a reference to the model
   const isDragging = useRef(false); // Track dragging state
   const previousMousePosition = useRef({ x: 0, y: 0 }); // Store previous mouse position
@@ -46,40 +45,22 @@ const ThreeDModelPage = () => {
         const model = gltf.scene;
         modelRef.current = model; // model reference
 
-        console.log("Model loaded:", model);
-        let debugText = `Model loaded. Child count: ${model.children.length}\n`;
-
-        // Traverse the model to log details about every mesh
-        model.traverse((child) => {
-          if (child.isMesh) {
-            debugText += `Mesh: ${
-              child.name
-            }, Position: ${child.position.toArray()}\n`;
-            child.geometry.computeBoundingBox();
-          }
-        });
-
         // Correct the position by subtracting the geometric center
         const geometricCenter = new THREE.Vector3(0, 1, 23);
         model.position.sub(geometricCenter); // Offset the model by its geometric center
 
-        //Scaling
+        // Scaling
         const scale = 0.1;
         model.scale.set(scale, scale, scale);
 
         scene.add(model);
         setModelLoaded(true);
-
-        // debugText += `Model manually centered to origin by adjusting position by ${geometricCenter.toArray()}\n`;
-        // debugText += `Model scale: ${model.scale.toArray()}\n`;
-        // setDebugInfo(debugText);
       },
       (xhr) => {
         console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
       },
       (error) => {
         console.error("An error occurred loading the model:", error);
-        setDebugInfo("Error loading model: " + error.message);
       }
     );
 
@@ -125,7 +106,39 @@ const ThreeDModelPage = () => {
       isDragging.current = false;
     };
 
-    const handleMouseLeave = () => {
+    // Touch controls for rotating the model
+    const handleTouchStart = (event) => {
+      isDragging.current = true;
+      previousMousePosition.current = {
+        x: event.touches[0].clientX,
+        y: event.touches[0].clientY,
+      };
+    };
+
+    const handleTouchMove = (event) => {
+      if (isDragging.current && modelRef.current) {
+        const deltaMove = {
+          x: event.touches[0].clientX - previousMousePosition.current.x,
+          y: event.touches[0].clientY - previousMousePosition.current.y,
+        };
+
+        const model = modelRef.current;
+        const rotateSpeed = 0.005; // sensitivity for rotation
+
+        // Rotate around Y-axis for horizontal drag (left/right)
+        model.rotation.y += deltaMove.x * rotateSpeed;
+
+        // Rotate around X-axis for vertical drag (up/down)
+        model.rotation.x += deltaMove.y * rotateSpeed;
+
+        previousMousePosition.current = {
+          x: event.touches[0].clientX,
+          y: event.touches[0].clientY,
+        };
+      }
+    };
+
+    const handleTouchEnd = () => {
       isDragging.current = false;
     };
 
@@ -133,8 +146,12 @@ const ThreeDModelPage = () => {
     mount.addEventListener("mousedown", handleMouseDown);
     mount.addEventListener("mousemove", handleMouseMove);
     mount.addEventListener("mouseup", handleMouseUp);
-    mount.addEventListener("mouseleave", handleMouseLeave);
-    mount.addEventListener("contextmenu", (e) => e.preventDefault()); // Prevent context menu on right-click
+    mount.addEventListener("mouseleave", handleMouseUp);
+
+    // Add touch event listeners
+    mount.addEventListener("touchstart", handleTouchStart);
+    mount.addEventListener("touchmove", handleTouchMove);
+    mount.addEventListener("touchend", handleTouchEnd);
 
     // Handle window resize
     const handleResize = () => {
@@ -151,7 +168,11 @@ const ThreeDModelPage = () => {
       mount.removeEventListener("mousedown", handleMouseDown);
       mount.removeEventListener("mousemove", handleMouseMove);
       mount.removeEventListener("mouseup", handleMouseUp);
-      mount.removeEventListener("mouseleave", handleMouseLeave);
+      mount.removeEventListener("mouseleave", handleMouseUp);
+
+      mount.removeEventListener("touchstart", handleTouchStart);
+      mount.removeEventListener("touchmove", handleTouchMove);
+      mount.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
@@ -180,9 +201,6 @@ const ThreeDModelPage = () => {
             ? "3D Model of Purifico Hand Dryer"
             : "Loading 3D Model..."}
         </p>
-        <pre className="mt-4 text-left text-xs text-zinc-300 overflow-auto max-h-40">
-          {debugInfo}
-        </pre>
       </main>
 
       <div className="absolute -bottom-5 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-blue-900 to-transparent z-30" />
