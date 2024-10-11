@@ -82,18 +82,26 @@ const SolutionPage = () => {
           ))}
         </div>
 
-        {/* New div for logos */}
+        {/* logos */}
         <div className="mt-16 flex items-center justify-center flex-wrap gap-8">
           <p className="text-zinc-300 text-xl mr-8">Backed by</p>
           <div className="flex items-center flex-wrap gap-8">
-            <a href="https://www.mercatus.org/emergent-ventures" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.mercatus.org/emergent-ventures"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src="https://i.postimg.cc/qRCxLtRz/capture-decran-2023-01-20-105452.png"
                 alt="Emergent Ventures"
                 className="h-12 sm:h-16 md:h-20 object-contain opacity-80"
               />
             </a>
-            <a href="https://falling-walls.com/lab/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://falling-walls.com/lab/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src="https://svgshare.com/i/19tz.svg"
                 alt="Falling Walls Lab"

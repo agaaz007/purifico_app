@@ -2,6 +2,50 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import backgroundImage from "../assets/background2.jpg";
+import { ShaderMaterial, Color } from "three";
+
+// Define vertex and fragment shaders
+const vertexShader = `
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  void main() {
+    vNormal = normalize(normalMatrix * normal);
+    vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
+    gl_Position = projectionMatrix * vec4(vPosition, 1.0);
+  }
+`;
+
+const fragmentShader = `
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  uniform vec3 lightPosition;
+  uniform vec3 viewPosition;
+  uniform vec3 baseColor;
+
+  void main() {
+    vec3 normal = normalize(vNormal);
+    vec3 lightDir = normalize(lightPosition - vPosition);
+    vec3 viewDir = normalize(viewPosition - vPosition);
+
+    // Ambient component
+    float ambientStrength = 0.1;
+    vec3 ambient = ambientStrength * baseColor;
+
+    // Diffuse component
+    float diff = max(dot(normal, lightDir), 0.0);
+    vec3 diffuse = diff * baseColor;
+
+    // Specular component
+    float specularStrength = 0.5;
+    vec3 reflectDir = reflect(-lightDir, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
+    vec3 specular = specularStrength * spec * vec3(1.0);
+
+    // Combine components
+    vec3 result = ambient + diffuse + specular;
+    gl_FragColor = vec4(result, 1.0);
+  }
+`;
 
 const ThreeDModelPage = () => {
   const mountRef = useRef(null);
@@ -45,6 +89,24 @@ const ThreeDModelPage = () => {
         const model = gltf.scene;
         modelRef.current = model; // model reference
 
+        // Create shader material
+        const shaderMaterial = new ShaderMaterial({
+          vertexShader,
+          fragmentShader,
+          uniforms: {
+            lightPosition: { value: new THREE.Vector3(0, 300, 800) },
+            viewPosition: { value: new THREE.Vector3(0, 0, 0) },
+            baseColor: { value: new Color(0.75, 0.75, 0.75) }, // Silver color
+          },
+        });
+
+        // Apply shader material to the model
+        model.traverse((child) => {
+          if (child.isMesh) {
+            child.material = shaderMaterial;
+          }
+        });
+
         // Correct the position by subtracting the geometric center
         const geometricCenter = new THREE.Vector3(0, 1, 23);
         model.position.sub(geometricCenter); // Offset the model by its geometric center
@@ -68,8 +130,8 @@ const ThreeDModelPage = () => {
     const animate = () => {
       requestAnimationFrame(animate);
 
-      if (modelRef.current) {
-        modelRef.current.rotation.y += 0.009; // rotation speed
+      if (modelRef.current && !isDragging.current) {
+        modelRef.current.rotation.y += 0.005; // rotation speed
       }
 
       renderer.render(scene, camera);

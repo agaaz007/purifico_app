@@ -8,7 +8,6 @@ const Footer = () => {
           <h2 className="text-xl font-bold">PURIFICO</h2>
           <p className="mt-1">agaazsinghal@gmail.com</p>
         </div>
-        {/* Quick Links section removed */}
         <div className="mb-8 sm:mb-0">
           <div className="mt-2 flex">
             <a
@@ -16,7 +15,7 @@ const Footer = () => {
               className="relative inline-flex items-center px-6 py-3 text-white bg-gradient-to-tr from-black via-black to-gray-800 border border-blue-600 rounded-full transition-shadow duration-300 ease-in-out group hover:shadow-[0_0_15px_rgba(37,99,235,0.5)]"
             >
               <span className="relative flex items-center space-x-2">
-                <span className="font-helvetica">Contact Us</span>
+                <span className="font-helvetica">Write to Us</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-4 h-4 transition-transform group-hover:translate-x-1"

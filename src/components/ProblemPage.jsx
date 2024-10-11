@@ -144,7 +144,6 @@ const ProblemPage = () => {
 
       <div ref={nextSectionRef} className="min-h-screen bg-gray-900">
         <ResearchPage />
-        {/* Add more content as needed */}
       </div>
     </div>
   );

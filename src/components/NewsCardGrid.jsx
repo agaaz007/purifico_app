@@ -25,7 +25,7 @@ const DualImageCard = ({
         />
       </div>
 
-      {/* Intriguing text */}
+      {/* text */}
       <div className="absolute bottom-20 left-4 right-4 p-4">
         <p className="text-white text-3xl font-bold leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
           {intriguingText}
