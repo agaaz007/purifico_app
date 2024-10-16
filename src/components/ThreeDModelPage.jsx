@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import backgroundImage from "../assets/background2.jpg";
 import { ShaderMaterial, Color } from "three";
+import { PlaneGeometry, Mesh } from "three";
 
 // Define vertex and fragment shaders
 const vertexShader = `
@@ -47,6 +48,26 @@ const fragmentShader = `
   }
 `;
 
+// Define glow shader
+const glowVertexShader = `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const glowFragmentShader = `
+  varying vec2 vUv;
+  uniform float time;
+  void main() {
+    float glow = 0.8 + 0.2 * sin(time + vUv.x * 10.0); // Adjust base intensity
+    glow = pow(glow, 2.0); // Increase the exponent for smoother transition
+    glow = smoothstep(0.0, 1.0, glow); // Use smoothstep for smoother edges
+    gl_FragColor = vec4(vec3(glow), 1.0);
+  }
+`;
+
 const ThreeDModelPage = () => {
   const mountRef = useRef(null);
   const [modelLoaded, setModelLoaded] = useState(false);
@@ -59,7 +80,7 @@ const ThreeDModelPage = () => {
 
     // Scene setup
     const scene = new THREE.Scene();
-    scene.background = null; // Set the background to be transparent
+    scene.background = new THREE.Color(0x000000);
 
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -67,43 +88,76 @@ const ThreeDModelPage = () => {
       0.1,
       1000
     );
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // alpha for transparency
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(mount.clientWidth, mount.clientHeight);
     mount.appendChild(renderer.domElement);
 
     // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
+
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(0, 300, 800);
     scene.add(directionalLight);
 
+    // Add side lights
+    const sideLight1 = new THREE.PointLight(0xffffff, 0.5, 1000);
+    sideLight1.position.set(-500, 200, 0);
+    scene.add(sideLight1);
+
+    const sideLight2 = new THREE.PointLight(0xffffff, 0.5, 1000);
+    sideLight2.position.set(500, 200, 0);
+    scene.add(sideLight2);
+
+    // Add spotlight
+    const spotLight = new THREE.SpotLight(0xffffff, 1);
+    spotLight.position.set(0, 300, 300); // Position above and in front of the model
+    spotLight.angle = Math.PI / 6; // Spotlight angle
+    spotLight.penumbra = 0.1; // Soft edge
+    spotLight.decay = 2; // Light decay
+    spotLight.distance = 1000; // Maximum range of the light
+    spotLight.castShadow = true; // Enable shadows
+    scene.add(spotLight);
+
     // Position camera
     camera.position.set(0, 0, 0);
+
+    // Create glow material
+    const glowMaterial = new ShaderMaterial({
+      vertexShader: glowVertexShader,
+      fragmentShader: glowFragmentShader,
+      uniforms: {
+        time: { value: 0.0 },
+      },
+    });
+
+    // Create a plane for the glowing background
+    const glowPlaneGeometry = new PlaneGeometry(1000, 500);
+    const glowPlane = new Mesh(glowPlaneGeometry, glowMaterial);
+    glowPlane.rotation.x = -Math.PI / 2; // Rotate to be horizontal
+    glowPlane.position.y = -100; // Slightly above the floor
+    scene.add(glowPlane);
 
     // Load GLTF model
     const loader = new GLTFLoader();
     loader.load(
-      "/threejs.json",
+      "/threejsv3.json",
       (gltf) => {
         const model = gltf.scene;
         modelRef.current = model; // model reference
 
-        // Create shader material
-        const shaderMaterial = new ShaderMaterial({
-          vertexShader,
-          fragmentShader,
-          uniforms: {
-            lightPosition: { value: new THREE.Vector3(0, 300, 800) },
-            viewPosition: { value: new THREE.Vector3(0, 0, 0) },
-            baseColor: { value: new Color(0.75, 0.75, 0.75) }, // Silver color
-          },
-        });
-
-        // Apply shader material to the model
+        // Ensure materials are set correctly
         model.traverse((child) => {
           if (child.isMesh) {
-            child.material = shaderMaterial;
+            const material = child.material;
+            if (
+              material.isMeshStandardMaterial ||
+              material.isMeshPhysicalMaterial
+            ) {
+              // Adjust material properties if needed
+              material.metalness = 1.0; // Ensure metalness is set
+              material.roughness = 0.5; // Adjust roughness as needed
+            }
           }
         });
 
@@ -112,7 +166,7 @@ const ThreeDModelPage = () => {
         model.position.sub(geometricCenter); // Offset the model by its geometric center
 
         // Scaling
-        const scale = 0.1;
+        const scale = 100;
         model.scale.set(scale, scale, scale);
 
         scene.add(model);
@@ -129,6 +183,9 @@ const ThreeDModelPage = () => {
     // Animation
     const animate = () => {
       requestAnimationFrame(animate);
+
+      // Update time uniform for glow effect
+      glowMaterial.uniforms.time.value += 0.01; // Slower increment
 
       if (modelRef.current && !isDragging.current) {
         modelRef.current.rotation.y += 0.005; // rotation speed
@@ -240,23 +297,22 @@ const ThreeDModelPage = () => {
 
   return (
     <div className="relative text-white min-h-screen overflow-hidden">
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      />
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-green-900/70 to-transparent" />
+      <div className="absolute inset-0 z-0 bg-cover bg-center opacity-20" />
+      <div className="absolute inset-0 z-10 bg-black" />
 
       <main className="relative z-20 container mx-auto px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl sm:text-5xl lg:text-7xl mt-12 sm:mt-24 lg:mt-24 mb-4 sm:mb-6 font-medium tracking-tight font-SuisseIntlRegular bg-gradient-to-r from-white via-white to-blue-500 bg-[length:200%_100%] text-transparent bg-clip-text">
+        <h2 className="text-4xl sm:text-5xl lg:text-7xl mt-12 sm:mt-24 lg:mt-24 mb-4 sm:mb-6 font-medium tracking-tight font-SuisseIntlRegular bg-gradient-to-r from bg-zinc-300 via-white to-zinc-300  bg-[length:200%_100%] inline-block text-transparent bg-clip-text">
           Purifico Hand Dryers
         </h2>
-        <p className="mb-6 sm:mb-8 max-w-4xl mx-auto text-zinc-300 leading-7 sm:leading-8 text-base sm:text-lg lg:text-xl">
-          Our mission is to create a clean, affordable and environmentally
-          friendly product that makes a difference in people's lives.
+        <p className="mb-6 sm:mb-8 max-w-4xl mx-auto text-zinc-400 leading-7 sm:leading-8 text-base sm:text-lg lg:text-xl">
+          Our mission is to create a{" "}
+          <span className="text-white">clean, affordable</span> and{" "}
+          <span className="text-white">environmentally friendly</span> product
+          that makes a difference in people's lives.
         </p>
         <div
           ref={mountRef}
-          className="w-full sm:w-4/5 lg:w-3/5 h-[300px] sm:h-[400px] lg:h-[500px] mx-auto bg-transparent rounded-lg shadow-lg"
+          className="w-full sm:w-4/5 lg:w-5/5 h-[300px] sm:h-[400px] lg:h-[600px] mx-auto bg-transparent rounded-lg shadow-lg"
         />
         <p className="mt-4 text-zinc-300 text-sm sm:text-base lg:text-lg">
           {modelLoaded

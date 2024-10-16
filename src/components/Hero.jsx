@@ -49,7 +49,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative text-white min-h-screen overflow-hidden">
+    <div className="relative text-white min-h-screen overflow-hidden bg-black">
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.5 }}

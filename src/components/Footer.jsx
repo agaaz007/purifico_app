@@ -1,8 +1,10 @@
 import React from "react";
+import ContactForm from "./ContactForm";
 
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-blue-900 to-black text-zinc-300 py-8">
+      {/* <ContactForm /> */}
       <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <div className="mb-8 sm:mb-0">
           <h2 className="text-xl font-bold">PURIFICO</h2>

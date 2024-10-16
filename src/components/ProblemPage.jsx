@@ -63,10 +63,10 @@ const ProblemPage = () => {
   return (
     <div
       id="problem"
-      className="relative text-white min-h-screen overflow-hidden"
+      className="relative text-white min-h-screen overflow-hidden "
     >
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-black"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       />
       <Navbar />
